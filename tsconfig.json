@@ -1,6 +1,79 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "jsx": "react-native",
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "strict": true
-  }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    ".eslintrc.cjs",
+    ".prettierrc.mjs",
+    "babel.config.cjs",
+    "metro.config.js"
+  ],
+  "exclude": ["node_modules", "jest.config.js"]
 }
+
+// extends: "expo/tsconfig.base"
+// Expoが提供する基本設定を継承し、プロジェクトのTypeScript設定をExpoに合わせています。これにより、Expoの標準設定がベースとして適用され、設定を必要に応じて上書きできます。
+
+// compilerOptions（コンパイラオプション）
+// allowJs: true
+// JavaScriptファイルもTypeScriptプロジェクトに含める設定です。これにより、TypeScriptとJavaScriptを混在して使用できます。
+
+// esModuleInterop: true
+// ESモジュールのインポート/エクスポート形式と互換性を持たせるための設定です。CommonJS形式のモジュールも、ES形式で扱えるようになります。
+
+// jsx: "react-native"
+// JSXコードの変換方法を指定します。React Native向けのJSX変換を行う設定です。
+// lib: ["DOM", "ESNext"]
+
+// 使用するライブラリを指定します。DOMと最新のESNext機能（最新のECMAScript標準）を使う設定です。
+// moduleResolution: "node"
+
+// モジュールの解決方法をNode.jsの方式に合わせる設定です。node_modulesからのモジュール解決を容易にします。
+// noEmit: true
+
+// TypeScriptのコンパイル時にJavaScriptファイルを出力しない設定です。この設定により、型チェックのみ行い、ファイルは生成しません。
+// resolveJsonModule: true
+
+// JSONファイルをTypeScriptでインポートできるようにする設定です。
+// skipLibCheck: true
+
+// ライブラリファイルの型チェックを省略し、ビルドを高速化します。
+// target: "ESNext"
+
+// TypeScriptの出力対象とするJavaScriptのバージョンを最新のESNextに設定します。
+// baseUrl: "."
+
+// モジュールの基準となるルートパスを設定しています。"."でプロジェクトのルートディレクトリを基準にします。
+// paths: { "@/*": ["src/*"] }
+
+// エイリアスを定義します。@/をsrc/に対応させ、importの際にパス指定を簡略化します。
+// strict: true
+
+// 厳密な型チェックモードを有効にします。これにより、型に関するエラーの検出が強化されます。
+// ファイルのインクルードとエクスクルード
+// include: TypeScriptが型チェックの対象とするファイルや設定ファイルのパターンをリストしています。
+
+// **/*.ts、**/*.tsx、**/*.js、**/*.jsx：TypeScriptとJavaScriptのファイルを対象にします。
+// .eslintrc.cjs、.prettierrc.mjsなど、プロジェクトの設定ファイルも型チェックに含めます。
+// exclude: コンパイルや型チェックから除外するファイルやディレクトリを指定します。
+
+// node_modules：依存関係は除外して、ビルド速度を向上させます。
+// jest.config.js：テスト設定ファイルも型チェック対象から除外します。
