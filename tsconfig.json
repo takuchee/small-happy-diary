@@ -22,7 +22,7 @@
     "**/*.js",
     "**/*.jsx",
     ".eslintrc.cjs",
-    ".prettierrc.mjs",
+    ".prettierrc.js",
     "babel.config.cjs",
     "metro.config.js"
   ],
