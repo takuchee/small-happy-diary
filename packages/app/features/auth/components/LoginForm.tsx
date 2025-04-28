@@ -1,24 +1,24 @@
-import { Button, Input, YStack, Text } from 'tamagui'
-import { useState } from 'react'
+import { AuthForm } from './AuthForm'
+import { supabase } from 'app/utils/supabase/supabase'
+import { YStack } from 'tamagui'
 
 interface LoginFormProps {
-  onSubmit: (email: string, password: string) => Promise<void>
+  isLoading?: boolean
+  error?: string
 }
 
-export function LoginForm({ onSubmit }: LoginFormProps) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+export function LoginForm({ isLoading, error }: LoginFormProps) {
+  const signIn = async (email: string, password: string) => {
+    const { data } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    console.log('SignIn Data:', data)
+  }
 
   return (
-    <YStack space="$4" p="$4">
-      <Input
-        placeholder="メールアドレス"
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize="none"
-      />
-      <Input placeholder="パスワード" value={password} onChangeText={setPassword} secureTextEntry />
-      <Button onPress={() => onSubmit(email, password)}>ログイン</Button>
+    <YStack p="$4" space="$4">
+      <AuthForm type="login" onSubmit={signIn} isLoading={isLoading} error={error} />
     </YStack>
   )
 }
