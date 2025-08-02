@@ -11,14 +11,9 @@ import {
   RecordHappinessDialog,
 } from '@my/ui'
 import { useState } from 'react'
-import { useLink } from 'solito/navigation'
 
 export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
   const [showDialog, setShowDialog] = useState(false)
-  const linkTarget = pagesMode ? '/pages-example-user' : '/user'
-  const linkProps = useLink({
-    href: `${linkTarget}/nate`,
-  })
 
   return (
     <YStack flex={1} justify="center" items="center" gap="$8" p="$4" bg="$background">

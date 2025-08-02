@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Button, Input, YStack, Text } from 'tamagui'
 
 interface AuthFormProps {
@@ -13,9 +13,9 @@ export function AuthForm({ type, onSubmit, isLoading, error }: AuthFormProps) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     await onSubmit(email, password)
-  }
+  }, [email, password, onSubmit])
 
   return (
     <YStack space="$4">
