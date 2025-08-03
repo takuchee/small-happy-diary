@@ -21,32 +21,47 @@ export function HomeScreen({ pagesMode = false }: { pagesMode?: boolean }) {
   })
 
   return (
-    <YStack flex={1} justify="center" items="center" gap="$8" p="$4" bg="$background">
-      <Card>
-        <Card.Header>
-          <Text>今月の幸せメモリ</Text>
-          <H1>0</H1>
-        </Card.Header>
-      </Card>
-      {/* 真ん中: キャラクターとセリフ */}
-      <Card elevate size="$4" bordered>
-        <Card.Header padded>
-          <YStack>
-            <YStack width={120} height={120}>
-              <Text fontSize={60}>😊</Text>
-              <Text>今日も偉い！！</Text>
+    <YStack flex={1} jc="space-between" ai="center" p="$4" bg="$background">
+      {/* Top: Character dialogue */}
+      <YStack width="100%" ai="center" pt="$8">
+        <Text fontSize="$8" fontWeight="bold" color="pink" mb="$4">
+          幸せ日記
+        </Text>
+        <Card elevate size="$4" bordered bg="#fce7f3" borderColor="#f9a8d4">
+          <Card.Header padded>
+            <YStack ai="center" gap="$2">
+              <YStack width={80} height={80} ai="center" jc="center">
+                <Text fontSize={50}>😊</Text>
+              </YStack>
+              <Text ta="center" fontSize="$4" color="#831843">
+                今日の小さな幸せ、見つけましたか？
+              </Text>
             </YStack>
-            {/* <Text textAlign="center" fontSize="$5" fontWeight="500" color="$pink11">
-              {praise}
-            </Text> */}
-          </YStack>
-        </Card.Header>
-      </Card>
-      <RecordHappinessDialog
-        open={showDialog}
-        onOpenChange={setShowDialog}
-        buttonName="小さな幸せを記録する"
-      />
+          </Card.Header>
+        </Card>
+      </YStack>
+
+      {/* Middle: Monthly count */}
+      <YStack ai="center" gap="$2">
+        <Card bg="#fdf2f8" borderColor="#f3e8ff" bordered>
+          <Card.Header padded>
+            <YStack ai="center" gap="$2">
+              <Text fontSize="$5" color="#831843">今月の小さな幸せ：3件</Text>
+              <Text fontSize="$6">✨</Text>
+            </YStack>
+          </Card.Header>
+        </Card>
+      </YStack>
+
+      {/* Bottom: Record button */}
+      <YStack width="100%" pb="$8">
+        <RecordHappinessDialog
+          open={showDialog}
+          onOpenChange={setShowDialog}
+          buttonName="日記を書く"
+        />
+      </YStack>
+      
       <FooterNav />
     </YStack>
   )
