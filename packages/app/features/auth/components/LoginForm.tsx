@@ -13,7 +13,6 @@ export function LoginForm({ isLoading, error }: LoginFormProps) {
       email,
       password,
     })
-    console.log('SignIn Data:', data)
   }
 
   return (

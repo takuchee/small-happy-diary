@@ -13,7 +13,6 @@ export function SignUpForm({ isLoading, error }: SignUpFormProps) {
       email,
       password,
     })
-    console.log('SignUp Data:', data)
   }
 
   return (

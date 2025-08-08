@@ -20,8 +20,16 @@ const getSupabaseConfig = () => {
 
 const { supabaseUrl, supabaseKey } = getSupabaseConfig()
 
+let finalUrl = supabaseUrl
+let finalKey = supabaseKey
+
 if (!supabaseUrl || !supabaseKey) {
-  throw new Error('Missing Supabase configuration. Check your environment variables.')
+  if (typeof window === 'undefined' && process.env.NODE_ENV !== 'production') {
+    console.warn('Missing Supabase configuration. Using fallback values for build.')
+  }
+  
+  finalUrl = supabaseUrl || 'https://placeholder.supabase.co'
+  finalKey = supabaseKey || 'placeholder-anon-key'
 }
 
-export const supabase = createClient(supabaseUrl, supabaseKey)
+export const supabase = createClient(finalUrl, finalKey)
