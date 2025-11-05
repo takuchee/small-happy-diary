@@ -12,24 +12,35 @@ const getSupabaseConfig = () => {
   }
 
   // For Next.js
-  return {
-    supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-    supabaseKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+  // Debug info in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Supabase Config:', {
+      supabaseUrl: supabaseUrl ? 'Set' : 'Not Set',
+      supabaseKey: supabaseKey ? 'Set' : 'Not Set',
+    })
   }
+
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('Environment Variables:', {
+      NODE_ENV: process.env.NODE_ENV,
+      hasSupabaseUrl: !!process.env.NEXT_PUBLIC_SUPABASE_URL,
+      hasSupabaseKey: !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    })
+  }
+
+  return { supabaseUrl, supabaseKey }
 }
 
-const { supabaseUrl, supabaseKey } = getSupabaseConfig()
+const config = getSupabaseConfig()
 
-let finalUrl = supabaseUrl
-let finalKey = supabaseKey
+let finalUrl = config.supabaseUrl
+let finalKey = config.supabaseKey
 
-if (!supabaseUrl || !supabaseKey) {
-  if (typeof window === 'undefined' && process.env.NODE_ENV !== 'production') {
-    console.warn('Missing Supabase configuration. Using fallback values for build.')
-  }
-  
-  finalUrl = supabaseUrl || 'https://placeholder.supabase.co'
-  finalKey = supabaseKey || 'placeholder-anon-key'
+if (!config.supabaseUrl || !config.supabaseKey) {
+  throw new Error('Missing Supabase configuration. Check your environment variables.')
 }
 
 export const supabase = createClient(finalUrl, finalKey)

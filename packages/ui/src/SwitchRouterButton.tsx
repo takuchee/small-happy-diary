@@ -1,9 +1,19 @@
-import { Anchor, Button } from 'tamagui'
+import { Button, YStack, Text } from 'tamagui'
+import { Link } from 'solito/link'
 
-export const SwitchRouterButton = ({ pagesMode = false }: { pagesMode?: boolean }) => {
+interface SwitchRouterButtonProps {
+  title: string
+  linkText: string
+  href: string
+}
+
+export const SwitchRouterButton = ({ title, linkText, href }: SwitchRouterButtonProps) => {
   return (
-    <Anchor text="center" color="$color12" href={pagesMode ? '/' : '/pages-example'}>
-      <Button>Change router: {pagesMode ? 'pages' : 'app'}</Button>
-    </Anchor>
+    <YStack alignItems="center" space="$2">
+      <Text>{title}</Text>
+      <Link href={href}>
+        <Button>{linkText}</Button>
+      </Link>
+    </YStack>
   )
 }

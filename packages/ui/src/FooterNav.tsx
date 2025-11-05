@@ -1,5 +1,5 @@
 import { Tabs, Group, YStack } from 'tamagui'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter, usePathname } from 'solito/navigation'
 
 const routes = [
   { label: 'ホーム', value: '/', icon: 'home' },
@@ -8,7 +8,7 @@ const routes = [
 ]
 
 export const FooterNav = () => {
-  const router = useRouter()
+  const { push } = useRouter()
   const pathname = usePathname()
 
   return (
@@ -27,7 +27,7 @@ export const FooterNav = () => {
       <Tabs
         value={pathname}
         onValueChange={(val) => {
-          if (val !== pathname) router.push(val)
+          if (val !== pathname) push(val)
         }}
         flexDirection="row"
       >
